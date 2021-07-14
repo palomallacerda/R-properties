@@ -38,6 +38,8 @@ str(milsa)
 # Atribuindo ao objeto estado civil  a coluna est.civil d Milsa
 estadocivil  <- table(milsa$Est.civil)
 estadocivil
+Salario  <- table(milsa$Salario)
+Salario
 
 
 # Criando um gráfico Barra
