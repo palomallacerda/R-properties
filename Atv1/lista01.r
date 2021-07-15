@@ -2,18 +2,15 @@
 
 lista <- c(48, 58, 56, 63, 52, 50, 59, 51, 59, 38, 57, 56, 73, 61, 41, 55, 49, 61, 49, 49, 52, 55, 60, 52, 54,  
            57, 47, 66, 60, 53, 59, 50, 45, 57, 64, 56, 57, 60, 47, 58, 53, 58, 66, 47, 40)
-
-
 #Questão 01
-coresbasicas = c(10:14)
 hist(lista, main="Histograma", ylab= "Frequência absoluta", 
      xlab = "Valores",col = 12, ylim = c(0,20), xlim = c(25, 85))
 
 length(lista)
 #Questão 02
-
 media<- mean(lista) 
 media
+
 ############################
 moderesult <-function(y){
    y_unico <- unique(y)
@@ -47,10 +44,35 @@ covid <- read.csv("/home/palomalacerda/Documentos/R/Atv1/dadosPacientes2021.csv 
 covidtab <- data.frame(covid)
 
 str(covidtab)
+
 ############## A ###############
-atual <- table(covidtab$situacao_atual)
-atual
-barplot(atual, main= "Situação atual")
+atual <- data.frame(covid$situacao_atual)
+atual01 <- table(atual)
+
+
+
+#Aumentando a Margem 
+situacao = c("")
+cor <- colorRampPalette(c("lightblue","Darkblue")) 
+par(mar= c(6,4,4,4))
+barplot(sort(atual01), main= "Situação atual",
+        col = cor(8), 
+        names.arg = c("OO","UTI", "AM","ILC", "O", "AH", "EID", "ID"),
+        las = 1,
+        cex.axis = 0.8,
+        ylim = c(0,160000),
+        ylab = "Quantidade de pessoas",
+        space = c(0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5),
+        font.axis= 3,
+        font.lab= 1)
+
+legend("topleft", legend = c("Óbito por outras Causas", "Internação UTI","Alta médica", "Internação leito Clinico", 
+                              "Óbito", "Alta Hospitalar", "Encerramento do Isolamento Domiciliar", "Isolamento Domiciliar"),
+       col = cor(8), 
+       bty = "n", pch=15, pt.cex = 2, cex = 0.8, horiz = FALSE, inset = c(0.05, 0.05))
+
+
+str(atual)
 ################################
 obtos <- data.frame(atual)
 
