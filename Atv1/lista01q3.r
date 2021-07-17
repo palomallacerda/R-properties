@@ -15,9 +15,6 @@ sex.dom<-sexo[c(-2)]
 
 str(sex.dom)
 
-pie(sex.dom, main = "Público em Isolamento", col=c("Red","DarkBlue"),
-    radius = 0.9, clockwise = TRUE, lty = NULL, border = 8)
-
 #############################################################
 ############## Base de dados ###############################
 
@@ -30,11 +27,15 @@ mcz_sexo <- mcz_obito[mcz_obito$sexo,]
 
 mcz.tb <- table(mcz_obito$sexo)
 
-sex.dom<-mcz.tb[c(-2)]
+isolamento<-mcz.tb[c(-2)]
 
-pie(sex.dom, main = "Número de Óbitos", col=c("Red","DarkBlue"),
+par(mfrow=c(1,2))
+
+pie(sex.dom, main = "Público em Isolamento", col=c("Red","DarkBlue"),
     radius = 0.9, clockwise = TRUE, lty = NULL, border = 8)
 
 
+pie(isolamento, main = "Número de Óbitos", col=c("Red","DarkBlue"),
+    radius = 0.9, clockwise = TRUE, lty = NULL, border = 8)
 
 
