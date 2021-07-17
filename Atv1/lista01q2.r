@@ -6,19 +6,13 @@ str(covidtab)
 
 ############## A ###############
 atual <- data.frame(covid$situacao_atual)
-str(atual)
-length(atual)
-class(atual)
 atual01 <- table(atual)
-
-atual01
-
 #Aumentando a Margem 
-cor <- colorRampPalette(c("lightblue","Darkblue")) 
 par(mar= c(6,4,4,2))
+cor <- colorRampPalette(c("lightblue","Darkblue")) 
 barplot(sort(atual01), main= "Situação atual dos pacientes",
         col = cor(8), 
-        names.arg = c("O","UTI", "AM","ILC", "O", "AH", "EID", "ID"),
+        names.arg = c("OO","UTI", "AM","ILC", "O", "AH", "EID", "ID"),
         las = 1,
         cex.axis = 0.8,
         ylim = c(0,160000),
@@ -61,14 +55,37 @@ boxplot(idade.tab)
 
 
 ############# número de obtos por idade #####################
-idade.tab<-table(sexo_idade$idade)
-idade.tab
-hist(idade.tab,  
-     main = "Óbitos por idade", 
-     xlab = "Idade", ylab = "Freq. Absoluta", 
-     col = c("violet"), 
-     border = FALSE, 
-     xlim = c(0,165), ylim = c(0,60),
-     )
+
+par(mar= c(10,6,6,1))
+hist(obtos_geral$idade[obtos_geral$idade >=0], main = "Histograma de óbito por idade", 
+     xlab = "Idade", ylab = "Frequência")
+
+############# número de obtos por mês #####################
+data <- data.frame("Data Obito"=obtos_geral$data_resultado_exame, obtos_geral$situacao_atual=="Óbito")
+data.tb<- as.Date(data$Data.Obito)
+data.mes <- table(months(data.tb))
+
+cor.tipo <- colorRampPalette(c("red","Yellow", "green")) 
+barplot(rev(sort(data.mes)), main = "Número de óbitos por mês",
+        ylim= c(0,1400), las=2, ylab = "Quantidade",
+        col = cor.tipo(12),cex.axis = 1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
