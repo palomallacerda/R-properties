@@ -45,14 +45,27 @@ barplot(sort(table), main= "Número de Óbitos por município",
         font.lab = 3, font.axis= 6, cex.names = 0.8)
 
 ################numero de obito por sexo e idade ####################
-sexo_idade <- data.frame("idade"=obtos_geral$idade, "sexo" = obtos_geral$sexo)
-
-str(sexo_idade)
-
-idade.tab<-table(sexo_idade$idade)
-idade.tab
-boxplot(idade.tab)
-
+obtos_geral <- obtos_geral[obtos_geral$idade>=0,]
+"Masculino"->obtos_geral$sexo[obtos_geral$sexo=="Mascuino"]
+sexo <- table(obtos_geral[3])
+idade <- table(obtos_geral[10])
+idade_tab
+sex.tab
+eixo_x <- xtabs(~sexo+idade, data=obtos_geral)
+par(mar= c(6,4,4,3))
+cor <- colorRampPalette(c("Red", "blue")) 
+barplot(eixo_x, main= "Óbito por Sexo vs Idade",
+        col = cor(2), 
+        cex.axis = 0.8,
+        xlim = c(0,150),
+        xlab = "Idade",
+        ylab = "Quantidade de pessoas",
+        space = 0.5,
+        font.axis= 3,
+        font.lab= 1)
+legend("topleft", legend = c("Feminino","Masculino"),
+       col = cor(2), 
+       bty = "n", pch=20, pt.cex = 2, cex = 0.8, horiz = FALSE, inset = c(0.05, 0.05))
 
 ############# número de obtos por idade #####################
 
