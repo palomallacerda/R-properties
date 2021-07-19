@@ -35,6 +35,8 @@ per1
 per2
 per3
 
+dev.off() 
+
 boxplot(lista, col = 7) #existe uma maior concentração de dados no 3 quartil 
 
 summary(lista)

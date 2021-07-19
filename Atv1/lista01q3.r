@@ -1,6 +1,6 @@
 
 ############## Base de dados ################
-pacientes <- read.csv("/home/palomalacerda/Documentos/R/Atv1/dadosPacientes2021.csv - dadosPacientes2021.csv.csv", header = TRUE)
+pacientes <- read.csv("~/R-properies/Atv1/dadosPacientes2021.csv", header = TRUE)
 
 mcz <- pacientes[pacientes$municipio_residencia=="Maceió",]
 
