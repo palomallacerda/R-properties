@@ -22,20 +22,30 @@ str(sex.dom)
 mcz_obito <- mcz[mcz$situacao_atual== "Óbito",]
 
 mcz_sexo <- mcz_obito[mcz_obito$sexo,]
-
+## Retirando o erro da base de dados ##
 "Masculino"->mcz_obito$sexo[mcz_sexo$sexo=="Masculino"] 
 
 mcz.tb <- table(mcz_obito$sexo)
 
 isolamento<-mcz.tb[c(-2)]
 
-par(mfrow=c(1,2))
+#### fazendo a porcentagem ####
 
-pie(sex.dom, main = "Público em Isolamento", col=c("Red","DarkBlue"),
-    radius = 0.9, clockwise = TRUE, lty = NULL, border = 8)
+name <- c("Feminino", "Masculino")
+###### porcentagem do primeiro gráfico ###########
+porcent <- round(sex.dom/sum(sex.dom)*100,2)
+rotulo <- paste(name,"\n",porcent ,"%", sep =" ")
 
+####### porcentagem do segundo gráfico ##########
+porcent2 <- round(isolamento/sum(isolamento)*100,2)
+rotulo1 <- paste(name, "\n",porcent2 ,"%", sep ="") 
 
-pie(isolamento, main = "Número de Óbitos", col=c("Red","DarkBlue"),
-    radius = 0.9, clockwise = TRUE, lty = NULL, border = 8)
+########### gráficos #############
+par(mfrow=c(2,1))
+pie(sex.dom, main = "Público em isolamento em Maceió", col=c("Red","DarkBlue"),
+    radius = 0.9, clockwise = TRUE, lty = NULL, border = 8, labels = rotulo)
+
+pie(isolamento, main = "Óbitos em Maceió", col=c("Red","DarkBlue"),
+    radius = 0.9, clockwise = TRUE, lty = NULL, border = 8, labels= rotulo1)
 
 

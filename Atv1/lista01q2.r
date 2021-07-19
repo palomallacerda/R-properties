@@ -44,14 +44,16 @@ barplot(sort(table), main= "Número de Óbitos por município",
         space = 0.3, col = cor1(5),las=2,
         font.lab = 3, font.axis= 6, cex.names = 0.8)
 
-################numero de obito por sexo e idade ####################
+################n umero de obito por sexo e idade ####################
 obtos_geral <- obtos_geral[obtos_geral$idade>=0,]
 "Masculino"->obtos_geral$sexo[obtos_geral$sexo=="Mascuino"]
 sexo <- table(obtos_geral[3])
-idade <- table(obtos_geral[10])
-idade_tab
-sex.tab
+
+idade <- table(cut(obtos_geral$idade, seq(0,110,10)))
+
 eixo_x <- xtabs(~sexo+idade, data=obtos_geral)
+
+
 par(mar= c(6,4,4,3))
 cor <- colorRampPalette(c("Red", "blue")) 
 barplot(eixo_x, main= "Óbito por Sexo vs Idade",
