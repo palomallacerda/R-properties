@@ -74,21 +74,79 @@ t.test(amostra, conf = alfa, mu = media_a, alternative = "less")
 
 
 
-### Teste de hipótese para duas médias #####
+### Teste de hipóteses para duas variancias #######
+h0 = "Iguais"
+h1 = "Diferentes"
+Var_1 <- c(54.07,45.92,44.10,39.36,38.46,40.20,40.93,45.24)
+var_2 <- c(40.42,32.64,45.67,41.62,45.08,34.73,32.58,38.96)
+var.test(Var_1,var_2) #verificar o p-valor e se é diferente que o nível de confiança
 
-h0 = Amostra_1-Amostra_2 = 0
-h1 = Amostra_1-Amostra_2 != 0
 
-Amostra_1 <-c(32, 27, 38, 35, 33, 29, 25, 19, 31, 24)
-Amostra_2 <- c(26, 21, 20, 37, 30, 18, 19, 25, 32, 34)
-diferenca = c(Amostra_1-Amostra_2)
-n <- 15 #15 alunos
-alfa = 0.05
+### TH para duas médias a direita (Unilateral) ###
+valor_1= c(300, 280, 344,385, 372, 360, 288, 321, 376, 290, 301, 283)
+valor_2 = c( 274, 220, 308, 336, 198, 300, 315, 258, 318, 310, 332, 263)
+
+# é preciso informar que os dados são pareados, logo paired = TRUE
+
+t.test(valor_1, valor_2, mu = 0, paired = F, conf.level = 0.98)# observar o valor t, p-value.
+
+
+t_obs = 1.4; p_value = 0.08
+
+### TH para duas médias a esquerda (unilateral)###
+
+valor_1= c(89,84,96,82,74,92,85,91)
+valor_2 = c(83,83,92,84,76,91,80,91)
+
+alfa = 0.1
+n = length(valor_1)
 
 valor_critico <- qt(1-alfa/2, n-1)
 valor_critico
 
-t.test(Amostra_1, Amostra_2, mu= 0, paired = T, conf.level = 0.95)
-t_calculado = 1.938
+t.test(valor_1, valor_2, mu = 0, paired = T, conf.level = 0.90, 
+       alternative= "greater")
+diferenca = c(Amostra_1-Amostra_2)
+
+### Teste de hipótese para duas médias (bilateral)#####
+#Amostras pareadas
+h0 = "Não há Diferença"
+h1= "Há diferença"
+
+Amostra_1 <-c(68.5, 74.0, 67.2, 69.9,68.0)
+Amostra_2 <-c(76.3, 75.3, 74.0, 71.2, 74.5)
+Amostra_3 <-c(70.6, 75.2, 70.8, 74.7, 72.9)
+Amostra_4 <- c(75.4,69.9,72.6,67.5,70.4)
+
+t_obs = sd(diferenca) #tobservado
+t_obs
+
+t.test(Amostra_1, Amostra_2, Amostra_3, Amostra_4, mu= 0, paired = F, conf.level = 0.95)
+t_calculado = -2.9104
+
+
+# Quando variancia é desconhecida e amostras independentes
+
+Amostra_1 <- c(54.07, 45.92, 44.10, 39.36, 38.46, 40.20, 40.93, 45.24)
+Amostra_2 <- c(40.42, 32.64, 45.67, 41.62, 45.08, 34.73, 32.58, 38.96)
+
+desvio1 = sd(Amostra_1); desvio2 = sd(Amostra_2); media1 = mean(Amostra_1); media2 = mean(Amostra_2);
+var1 = des1 * ds1 #output: 
+var2 = ds2 * ds2 #output: 
+
+# utilizando a tabela F, com significância alfa/2 = 0.025, temos F(2.5%, 7, 7) = 4,99.
+
+Fcalc = var2 / var1 #output: 1.051
+
+# como Fcalc está dentro do intervalo RNC de -4,99 a 4,99, aceitamos h0 e rejeitamos h1.
+
+
+# Exemplo 2: repetição do exemplo 1 porém utilizando a função var.test.
+
+var.test(y, x)
+#o output retorna um valor F correspondente ao Fcalc = 1.051.
+# Temos a mesma conclusão, Fcalc < Falfa.
+
+
 
 
